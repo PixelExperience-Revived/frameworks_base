@@ -193,7 +193,7 @@ public class PluginManagerImpl extends BroadcastReceiver implements PluginManage
         filter.addAction(PLUGIN_CHANGED);
         filter.addAction(DISABLE_PLUGIN);
         filter.addDataScheme("package");
-        mContext.registerReceiver(this, filter);
+        mContext.registerReceiver(this, filter, PluginInstanceManager.PLUGIN_PERMISSION, null);
         filter = new IntentFilter(Intent.ACTION_USER_UNLOCKED);
         mContext.registerReceiver(this, filter);
     }
