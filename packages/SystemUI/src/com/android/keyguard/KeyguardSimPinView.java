@@ -42,6 +42,8 @@ import com.android.internal.telephony.IccCardConstants;
 import com.android.internal.telephony.IccCardConstants.State;
 import com.android.internal.telephony.PhoneConstants;
 import com.android.systemui.R;
+import com.android.keyguard.KeyguardSecurityModel.SecurityMode;
+
 
 /**
  * Displays a PIN pad for unlocking.
@@ -343,7 +345,8 @@ public class KeyguardSimPinView extends KeyguardPinBasedInputView {
                                 mRemainingAttempts = -1;
                                 mShowDefaultMessage = true;
                                 if (mCallback != null) {
-                                    mCallback.dismiss(true, KeyguardUpdateMonitor.getCurrentUser());
+                                    mCallback.dismiss(true, KeyguardUpdateMonitor.getCurrentUser(),
+                                        SecurityMode.SimPin);
                                 }
                             } else {
                                 mShowDefaultMessage = false;
@@ -390,6 +393,11 @@ public class KeyguardSimPinView extends KeyguardPinBasedInputView {
     public CharSequence getTitle() {
         return getContext().getString(
                 com.android.internal.R.string.keyguard_accessibility_sim_pin_unlock);
+    }
+
+    @Override
+    public SecurityMode getSecurityMode() {
+        return SecurityMode.SimPin;
     }
 }
 
